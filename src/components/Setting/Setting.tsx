@@ -4,6 +4,7 @@ import { InitValues } from "../../App";
 
 const COUNTER = "counter";
 const MAX = "max";
+const START = "start";
 
 type SettingPropsType = {
   counter: string;
@@ -13,22 +14,22 @@ type SettingPropsType = {
 };
 
 export const Setting = (props: SettingPropsType) => {
-  const { counter, setCounter, initValues, setInitValues } = props;
+  const { setCounter, initValues, setInitValues } = props;
 
   useEffect(() => {
-    const counterStore = localStorage.getItem(COUNTER);
+    const startStore = localStorage.getItem(START);
     const maxStore = localStorage.getItem(MAX);
-    if (counterStore && maxStore) {
+    if (startStore && maxStore) {
+      setInitValues((prev) => ({ ...prev, start: startStore }));
       setInitValues((prev) => ({ ...prev, max: maxStore }));
-      setInitValues((prev) => ({ ...prev, start: counterStore }));
-      setCounter(counterStore);
+      setCounter(startStore);
     }
   }, [setCounter, setInitValues]);
 
   const setBtn = () => {
     const newCounter = initValues.start;
     setCounter(newCounter);
-    localStorage.setItem(COUNTER, counter);
+    localStorage.setItem(START, initValues.start);
     localStorage.setItem(MAX, initValues.max);
   };
 
