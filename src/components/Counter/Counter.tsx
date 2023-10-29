@@ -19,7 +19,7 @@ export const Counter = (props: CounterPropsType) => {
   // const isResetBtnDisabled = startCount;
 
   const onClickHandler = () => {
-    if (counter < maxCount) {
+    if (Number(counter) < Number(maxCount)) {
       setCounter(convertState(counter, 1));
     }
   };
