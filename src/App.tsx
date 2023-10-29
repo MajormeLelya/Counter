@@ -1,24 +1,34 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import "./App.css";
+import { Counter } from "./components/Counter/Counter";
+import { Setting } from "./components/Setting/Setting";
+
+export interface InitValues {
+  max: string;
+  start: string;
+}
 
 function App() {
+  const [initValues, setInitValues] = useState<InitValues>({
+    max: "0",
+    start: "0",
+  });
+
+  const [counter, setCounter] = useState<string>("0");
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="divContainer">
+      <Setting
+        counter={counter}
+        setCounter={setCounter}
+        initValues={initValues}
+        setInitValues={setInitValues}
+      />
+      <Counter
+        counter={counter}
+        setCounter={setCounter}
+        initValues={initValues}
+      />
     </div>
   );
 }
