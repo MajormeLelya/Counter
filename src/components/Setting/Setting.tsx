@@ -1,20 +1,34 @@
-import React, { ChangeEvent, Dispatch, useEffect } from "react";
+import React, { Dispatch, useEffect, useState } from "react";
 import { Button } from "../Button/Button";
 import { InitValues } from "../../App";
-
-const COUNTER = "counter";
-const MAX = "max";
-const START = "start";
+import { Input } from "../Input/Input";
 
 type SettingPropsType = {
   counter: string;
   setCounter: Dispatch<React.SetStateAction<string>>;
   initValues: InitValues;
   setInitValues: Dispatch<React.SetStateAction<InitValues>>;
+  settingBtn: boolean;
+  setSettingBtn: Dispatch<React.SetStateAction<boolean>>;
+  startMsg: boolean;
+  setStartMsg: Dispatch<React.SetStateAction<boolean>>;
 };
 
+const MAX = "max";
+const START = "start";
+
 export const Setting = (props: SettingPropsType) => {
-  const { setCounter, initValues, setInitValues } = props;
+  const {
+    setCounter,
+    initValues,
+    setInitValues,
+    settingBtn,
+    setSettingBtn,
+    counter,
+    setStartMsg,
+  } = props;
+
+  const [dis, setDis] = useState<boolean>(false);
 
   useEffect(() => {
     const startStore = localStorage.getItem(START);
@@ -26,50 +40,40 @@ export const Setting = (props: SettingPropsType) => {
     }
   }, [setCounter, setInitValues]);
 
+  useEffect(() => {
+    setDis(
+      +initValues.start >= +initValues.max ||
+        +initValues.start < 0 ||
+        +initValues.max < 0
+    );
+  }, [initValues]);
+
   const setBtn = () => {
     const newCounter = initValues.start;
     setCounter(newCounter);
+    setSettingBtn(true);
+    setStartMsg(false);
+
     localStorage.setItem(START, initValues.start);
     localStorage.setItem(MAX, initValues.max);
   };
 
-  const maxValueHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    setInitValues((prev) => ({ ...prev, max: e.target.value }));
-  };
-
-  const startValueHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    setInitValues((prev) => ({ ...prev, start: e.target.value }));
-  };
-
   return (
     <div className="box">
-      <div className="inputsBox">
-        <label htmlFor="max" className="lebelStyle">
-          max value :
-          <input
-            onChange={maxValueHandler}
-            value={initValues.max}
-            className="inputsStyle"
-            type="number"
-            id="max"
-          />
-        </label>
-
-        <label htmlFor="start" className="lebelStyle">
-          start value :
-          <input
-            onChange={startValueHandler}
-            value={initValues.start}
-            className="inputsStyle"
-            type="number"
-            id="start"
-            max={Number(initValues.max) - 1}
-          />
-        </label>
-      </div>
-
+      <Input
+        initValues={initValues}
+        setInitValues={setInitValues}
+        settingBtn={settingBtn}
+        setSettingBtn={setSettingBtn}
+        counter={counter}
+        setCounter={setCounter}
+      />
       <div className="divBtn">
-        <Button name={"set"} clickHandler={setBtn} />
+        <Button
+          name={"set"}
+          clickHandler={setBtn}
+          disabled={dis || settingBtn}
+        />
       </div>
     </div>
   );

@@ -35,13 +35,78 @@ code {
   gap: 30px;
 }
 
+.error {
+  width: 70%;
+  height: 40%;
+
+  border: 3px solid #bc13fe;
+  border-radius: 5px;
+  font-size: 30px;
+  color: #bc13fe;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .counter {
   width: 70%;
   height: 40%;
-  color: #bc13fe;
+
   border: 3px solid #bc13fe;
   border-radius: 5px;
   font-size: 50px;
+  font-weight: 600;
+  color: #bc13fe;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.counterError {
+  width: 70%;
+  height: 40%;
+
+  border: 3px solid #bc13fe;
+  border-radius: 5px;
+  font-size: 60px;
+  font-weight: 600;
+  color: #ca071b;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.startMessage {
+  width: 70%;
+  height: 40%;
+
+  border: 3px solid #bc13fe;
+  border-radius: 5px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #bc13fe;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.counterErrorMessage {
+  width: 70%;
+  height: 40%;
+
+  border: 3px solid #bc13fe;
+  border-radius: 5px;
+  font-size: 20px;
+  font-weight: 600;
+  color: #ca071b;
 
   display: flex;
   flex-direction: column;
@@ -102,6 +167,14 @@ button:disabled {
   height: 20px;
   border-color: #bc13fe;
   background-color: rgb(244, 225, 246);
+  text-align: center;
+}
+
+.errorInputsStyle {
+  width: 60px;
+  height: 20px;
+  border-color: #ca071b;
+  background-color: rgb(247, 128, 128);
   text-align: center;
 }
 

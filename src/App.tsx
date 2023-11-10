@@ -15,19 +15,28 @@ function App() {
   });
 
   const [counter, setCounter] = useState<string>("0");
+  const [settingBtn, setSettingBtn] = useState<boolean>(false);
+  const [startMsg, setStartMsg] = useState<boolean>(true);
 
   return (
     <div className="divContainer">
       <Setting
+        settingBtn={settingBtn}
+        setSettingBtn={setSettingBtn}
         counter={counter}
         setCounter={setCounter}
         initValues={initValues}
         setInitValues={setInitValues}
+        startMsg={startMsg}
+        setStartMsg={setStartMsg}
       />
       <Counter
+        settingBtn={settingBtn}
         counter={counter}
         setCounter={setCounter}
         initValues={initValues}
+        startMsg={startMsg}
+        setStartMsg={setStartMsg}
       />
     </div>
   );
